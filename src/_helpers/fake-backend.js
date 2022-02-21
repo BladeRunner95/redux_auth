@@ -10,13 +10,12 @@ export function configureFakeBackend() {
             setTimeout(handleRoute, 500);
 
             function handleRoute() {
-
                 switch (true) {
                     case url.endsWith('/users/authenticate') && method === 'POST' :
                         return authenticate();
-                    case url.endsWith('users/register') && method === 'POST' :
+                    case url.endsWith('/users/register') && method === 'POST' :
                         return register();
-                    case url.endsWith('users') && method === 'GET' :
+                    case url.endsWith('/users') && method === 'GET' :
                         return getUsers();
                     case url.match(/\/users\/\d+$/) && method === 'DELETE' :
                         return deleteUser();
@@ -87,7 +86,7 @@ export function configureFakeBackend() {
             }
 
             function isLoggedIn() {
-                return headers['Authorizations'] === 'Bearer fake-jwt-token';
+                return headers['Authorization'] === 'Bearer fake-jwt-token';
             }
 
             function idFromUrl() {
